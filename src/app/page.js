@@ -4,6 +4,7 @@ import ShoppingList from "../components/ShoppingList";
 import ItemDisplay from "../components/ItemDisplay";
 import Item from "../components/Item";
 import Navbar from "../components/Navbar";
+import Link from "next/link";
 
 export default function Home() {
   const [basket, setBasket] = useState({});
@@ -11,6 +12,8 @@ export default function Home() {
   const items = [
     new Item("Item 1", 10),
     new Item("Item 2", 20),
+    new Item("Item 3", 30),
+    new Item("Item 4", 40),
     // Add more items as needed
   ];
 
@@ -26,7 +29,7 @@ export default function Home() {
 
   return (
     <main className="">
-      <Navbar basket={basket} items={items} /> {/* Pass items array as prop */}
+      <Navbar basket={basket} items={items} />
       <div>
         <h1 className=" text-center my-4 text-4xl font-bold">My Store</h1>
         <div>
@@ -38,8 +41,16 @@ export default function Home() {
             />
           ))}
         </div>
-        {/* <ShoppingList basket={basket} /> */}
       </div>
+      <ShoppingList basket={basket} /> {/* Pass basket data as prop */}
+      <Link
+        href={{
+          pathname: "/checkout",
+          query: { basket: JSON.stringify(basket) },
+        }}
+      >
+        <a>Checkout</a> {/* Pass basket data as query parameter */}
+      </Link>
     </main>
   );
 }

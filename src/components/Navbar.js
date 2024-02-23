@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Navbar({ basket, items }) {
   // Receive items as prop
   const totalQuantity = Object.values(basket).reduce(
@@ -18,6 +20,16 @@ export default function Navbar({ basket, items }) {
       <div className="container mx-auto flex justify-between items-center">
         <div>
           <h1 className="text-xl font-bold">My Store</h1>
+        </div>
+        <div>
+          <Link
+            href={{
+              pathname: "/checkout",
+              query: { basket: JSON.stringify(basket) },
+            }}
+          >
+            <p className="text-white">Checkout</p>
+          </Link>
         </div>
         <div>
           <p className="text-sm">Total Items: {totalQuantity}</p>
