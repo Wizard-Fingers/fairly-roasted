@@ -28,7 +28,7 @@ export default function Home() {
     <main className="">
       <Navbar basket={basket} items={items} /> {/* Pass items array as prop */}
       <div>
-        <h1>My Store</h1>
+        <h1 className=" text-center my-4 text-4xl font-bold">My Store</h1>
         <div>
           {items.map((item, index) => (
             <ItemDisplay
@@ -38,7 +38,7 @@ export default function Home() {
             />
           ))}
         </div>
-        <ShoppingList basket={basket} />
+        {/* <ShoppingList basket={basket} /> */}
       </div>
     </main>
   );
