@@ -19,7 +19,7 @@ export default function Navbar({ basket, items }) {
     <nav className="bg-gray-800 p-4 text-white">
       <div className="container mx-auto flex justify-between items-center">
         <div>
-          <h1 className="text-xl font-bold">My Store</h1>
+          <h1 className="text-xl font-bold">LOGO</h1>
         </div>
         <div>
           <Link

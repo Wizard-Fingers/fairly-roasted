@@ -5,6 +5,7 @@ import ItemDisplay from "../components/ItemDisplay";
 import Item from "../components/Item";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
+import { StateProvider } from "../components/StateContext";
 
 export default function Home() {
   const [basket, setBasket] = useState({});
@@ -49,7 +50,7 @@ export default function Home() {
           query: { basket: JSON.stringify(basket) },
         }}
       >
-        <a>Checkout</a> {/* Pass basket data as query parameter */}
+        <p>Checkout</p> {/* Pass basket data as query parameter */}
       </Link>
     </main>
   );
