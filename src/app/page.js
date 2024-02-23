@@ -2,11 +2,10 @@
 import React, { useState } from "react";
 import ShoppingList from "../components/ShoppingList";
 import ItemDisplay from "../components/ItemDisplay";
-import Basket from "../components/Basket";
 import Item from "../components/Item";
 
 export default function Home() {
-  const [basket, setBasket] = useState([]); // Initializing state as an empty array
+  const [basket, setBasket] = useState({}); // Initialize basket as an empty object
 
   const items = [
     new Item("Item 1", 10),
@@ -15,9 +14,16 @@ export default function Home() {
   ];
 
   const handleAddToBasket = (item) => {
-    // Create a new copy of the basket array with the new item added
-    const updatedBasket = [...basket, item];
-    setBasket(updatedBasket); // Update state with the new basket
+    // Check if the item already exists in the basket
+    if (basket[item.name]) {
+      // If yes, increment its quantity
+      const updatedBasket = { ...basket };
+      updatedBasket[item.name] += 1;
+      setBasket(updatedBasket);
+    } else {
+      // If not, add it to the basket with a quantity of 1
+      setBasket({ ...basket, [item.name]: 1 });
+    }
   };
 
   return (
