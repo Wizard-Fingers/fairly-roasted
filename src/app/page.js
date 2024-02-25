@@ -1,11 +1,12 @@
 "use client";
+import { StateProvider } from "../components/StateContext";
 import React, { useState } from "react";
 import ShoppingList from "../components/ShoppingList";
 import ItemDisplay from "../components/ItemDisplay";
 import Item from "../components/Item";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
-import { StateProvider } from "../components/StateContext";
+// import { StateProvider } from "../components/StateContext";
 
 export default function Home() {
   const [basket, setBasket] = useState({});
@@ -29,29 +30,31 @@ export default function Home() {
   };
 
   return (
-    <main className="">
-      <Navbar basket={basket} items={items} />
-      <div>
-        <h1 className=" text-center my-4 text-4xl font-bold">My Store</h1>
+    <StateProvider>
+      <main className="">
+        <Navbar basket={basket} items={items} />
         <div>
-          {items.map((item, index) => (
-            <ItemDisplay
-              key={index}
-              item={item}
-              onAddToBasket={handleAddToBasket}
-            />
-          ))}
+          <h1 className=" text-center my-4 text-4xl font-bold">My Store</h1>
+          <div>
+            {items.map((item, index) => (
+              <ItemDisplay
+                key={index}
+                item={item}
+                onAddToBasket={handleAddToBasket}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-      <ShoppingList basket={basket} /> {/* Pass basket data as prop */}
-      <Link
-        href={{
-          pathname: "/checkout",
-          query: { basket: JSON.stringify(basket) },
-        }}
-      >
-        <p>Checkout</p> {/* Pass basket data as query parameter */}
-      </Link>
-    </main>
+        <ShoppingList basket={basket} /> {/* Pass basket data as prop */}
+        <Link
+          href={{
+            pathname: "/checkout",
+            query: { basket: JSON.stringify(basket) },
+          }}
+        >
+          <p>Checkout</p> {/* Pass basket data as query parameter */}
+        </Link>
+      </main>
+    </StateProvider>
   );
 }
